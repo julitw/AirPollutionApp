@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AirPollutionResponse } from './shared/air-pollution-response.model';
-import { environment } from './enviroment';
+import { environment } from 'src/environments';
+
 
 
 
