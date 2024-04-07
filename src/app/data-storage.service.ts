@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AirPollutionResponse } from './shared/air-pollution-response.model';
+import { environment } from './enviroment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PollutionDataService {
-  private apiKey = '6816136db30869b9d37fbf0f86ac5725'; 
+  private apiKey = environment.apiKey;
+
 
   constructor(private http: HttpClient) {}
 
