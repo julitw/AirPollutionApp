@@ -8,13 +8,15 @@ import { AirPollutionWorldComponent } from './air-pollution-world/air-pollution-
 import { HomeComponent } from './home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AirPollutionWorldMapComponent } from './air-pollution-world/air-pollution-world-map/air-pollution-world-map.component';
+import { AirPollutionWorldTable } from './air-pollution-world/air-pollution-world-table/air-pollution-world-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AirPollutionWorldComponent,
     HomeComponent,
-    AirPollutionWorldMapComponent
+    AirPollutionWorldMapComponent,
+    AirPollutionWorldTable
   ],
   imports: [
     BrowserModule,
