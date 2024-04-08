@@ -21,6 +21,8 @@ export class AirPollutionWorldService {
   private selectedLocationsSubject = new BehaviorSubject<LocationAirQuality[]>([]);
     selectedLocations$ = this.selectedLocationsSubject.asObservable();
 
+  selectedLocationsMap: LocationAirQuality[] = []
+
   private locations: Location[] = [];
   private locationsSubscription: Subscription;
 
@@ -54,7 +56,6 @@ export class AirPollutionWorldService {
       }
     );
   }
-
 
 loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
     this.locations = this.locationsService.get_locations();
@@ -93,6 +94,24 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
     });
   }
 
+  addLocationClickedMap(location: Location): void {
+    const currentLocations = this.locationsAirQualitySubject.getValue()
+    var  currentSelectedLocations = this.selectedLocationsSubject.getValue();
+    console.log('MAPA', currentSelectedLocations)
+    const existingSelectedLocation = currentSelectedLocations.find(loc => loc.id === location.id);
+    if (!existingSelectedLocation){
+        const newSelectedLocation = currentLocations.find((loc)=> loc.id === location.id)
+        currentSelectedLocations.push(newSelectedLocation)
+        this.selectedLocationsSubject.next(currentSelectedLocations)
+        console.log("NIE ISTNIEJE", newSelectedLocation)
+    }
+      else{
+        currentSelectedLocations = currentSelectedLocations.filter((loc) => loc.id !== location.id)
+        this.selectedLocationsSubject.next(currentSelectedLocations)
+    }
+        
+  }
+  
   getData(latitude: number, longitude: number): void {
     this.pollutionDataService.getAirPollutionData(latitude, longitude)
       .subscribe(
@@ -111,24 +130,6 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
   getLocationAirPollution(){
     this.loadLocationsAirQuality()
   }
-
-  removeLastElement() {
-
-    const currentArray = this.locationsAirQualitySubject.getValue();
-    console.log("Filter", currentArray[0].airQuality[0].main.aqi)
-    const filteredLocations = currentArray.filter(location => location.name==='London' )
-    currentArray.sort((a,b) => {
-      return a.id - b.id
-    })
-    console.log(filteredLocations)
-    if (currentArray.length > 0) {
-      const newArray = currentArray.slice(0, -1); 
-      this.locationsAirQualitySubject.next(newArray);
-    } else {
-      console.log('Tablica jest pusta, nie można usunąć ostatniego elementu.');
-    }
-  }
-
 
   sortTable(columnName: string) {
     const currentArray = this.locationsAirQualitySubject.getValue();
@@ -157,12 +158,13 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
     this.locationsAirQualitySubject.next(currentArray);
   }
 
-    updateSelectedLocations(locations: LocationAirQuality[]): void {
+  updateSelectedLocations(locations: LocationAirQuality[]): void {
             this.selectedLocationsSubject.next(locations);
-            }
+  }
 
-    getSelectedLocations(){
+  getSelectedLocations(){
         return this.selectedLocationsSubject.getValue()
     }
+
 
 }

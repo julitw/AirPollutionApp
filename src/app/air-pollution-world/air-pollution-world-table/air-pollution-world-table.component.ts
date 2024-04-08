@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AirPollutionWorldService } from '../air-pollution-world.service';
 import { LocationAirQuality } from 'src/app/shared/location-air-pollution.model';
 import { Subscription } from 'rxjs';
+import { Location } from 'src/app/shared/location.model';
 
 declare let L: any;
 
@@ -17,6 +18,9 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
   locationsAirQuality: LocationAirQuality[] = [];
   selectedLocations: LocationAirQuality[] = [];
   selectedLocationsSubscription: Subscription;
+  selectedLocationsMap: Location[] = [];
+
+  private selectedLocationsMapSubscription: Subscription;
 
 
 
@@ -45,7 +49,7 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
           console.error('Error subscribing to selected locations:', error);
         }
       );
-    
+
   }
 
   sortTable(columnName: string): void {
@@ -59,7 +63,8 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
 
   toggleSelection(location: LocationAirQuality): void {
     if (this.isSelected(location)) {
-      this.airPollutionWorldService.updateSelectedLocations(this.selectedLocations.filter(item => item !== location));
+      console.log('OKK')
+      this.airPollutionWorldService.updateSelectedLocations(this.selectedLocations.filter(item => item.id !== location.id));
     } else {
       const updatedSelectedLocations = [...this.selectedLocations, location];
       this.airPollutionWorldService.updateSelectedLocations(updatedSelectedLocations);
@@ -67,7 +72,7 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
   }
 
   isSelected(location: LocationAirQuality): boolean {
-    return this.selectedLocations.includes(location);
+    return this.selectedLocations.some(item => item.id === location.id);
   }
 
   show_graphs(){

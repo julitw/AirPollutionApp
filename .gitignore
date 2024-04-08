@@ -41,4 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 # Angular environment files
-src/app/environment.ts
+src/environments.ts

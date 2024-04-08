@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AirPollutionWorldService } from '../air-pollution-world.service';
 import { LocationAirQuality } from 'src/app/shared/location-air-pollution.model';
 import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocationConfigService } from 'src/app/shared/location-config.service';
+import { Location } from 'src/app/shared/location.model';
 
 declare let L: any;
 
@@ -17,9 +20,17 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
 
   airQualityDataLocation: Subscription;
   locationsAirQuality: LocationAirQuality[] = [];
+
+  
+  selectedLocationMapData: Subscription;
+  selectedLocationMap: Location[] = [];
   map: any; 
 
-  constructor(private airPollutionWorldService: AirPollutionWorldService) {}
+  mapForm: FormGroup;
+  
+  clickedCoord: { lat: number, lng: number };
+
+  constructor(private airPollutionWorldService: AirPollutionWorldService, private formBuilder: FormBuilder, private locationConfigSerivce: LocationConfigService) {}
 
   ngOnInit(): void {
     this.airQualityDataLocation = this.airPollutionWorldService.locationsAirQuality$
@@ -32,8 +43,13 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
         error => {
           console.error('Error loading location air quality data:', error);
         }
+
       );
-    
+      this.mapForm = this.formBuilder.group({
+        latitude: [''],
+        longitude: ['']
+      });
+      this.initForm();
     this.initMap();
   }
 
@@ -41,7 +57,11 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
     this.airQualityDataLocation.unsubscribe(); 
   }
 
-  
+  updateForm(latitude: number, longitude: number): void {
+    this.mapForm.patchValue({
+      latitude: latitude,
+      longitude: longitude
+    });}
 
   
   private initMap(): void {
@@ -66,29 +86,30 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
 
     
     this.locationsAirQuality.forEach(location => {
-      let iconSize: [number, number]; 
+      let iconUrl: string; 
+      const iconSize:[number, number] = [50,50]
       switch (location.airQuality[0].main.aqi) {
         case 1:
-          iconSize = [25, 41]; // Mały rozmiar dla klasy 1
+          iconUrl = 'assets/marker-icon_blue.png'; // Mały rozmiar dla klasy 1
           break;
         case 2:
-          iconSize = [30, 50]; // Średni rozmiar dla klasy 2
+          iconUrl = 'assets/marker-icon_green.png'; // Średni rozmiar dla klasy 2
           break;
         case 3:
-          iconSize = [35, 60]; // Średni rozmiar dla klasy 3
+          iconUrl = 'assets/marker-icon_yellow.png'; // Średni rozmiar dla klasy 3
           break;
         case 4:
-          iconSize = [40, 70]; // Duży rozmiar dla klasy 4
+          iconUrl = 'assets/marker-icon_orange.png'; // Duży rozmiar dla klasy 4
           break;
         case 5:
-          iconSize = [45, 80]; // Bardzo duży rozmiar dla klasy 5
+          iconUrl = 'assets/marker-icon_red.png'; // Bardzo duży rozmiar dla klasy 5
           break;
         default:
-          iconSize = [25, 41]; // Domyślny rozmiar
+          iconUrl = 'assets/marker-icon_blue.png'; // Domyślny rozmiar
       }
 
       const customIcon = L.icon({
-        iconUrl: 'assets/marker-icon.png',
+        iconUrl: iconUrl,
         iconSize: iconSize,
         iconAnchor: [iconSize[0] / 2, iconSize[1]],
         popupAnchor: [0, -iconSize[1] / 2]
@@ -98,15 +119,42 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
         .addTo(this.map)
         .bindPopup(`<b>${location.name}</b>`)
         .on('click', () => {
-          this.clicked_place = location.name;
-          console.log(this.clicked_place);
+          this.clicked_place = location.name 
+          const name = location.name
+          const id = location.id
+          const latitude = location.latitude;
+          const longitude = location.longitude;
+          const location_clicked: Location = {id,name,latitude, longitude }
+          this.airPollutionWorldService.addLocationClickedMap(location_clicked)
         });
     });
 
     this.map.on('click', (event) => {
       const lat = event.latlng.lat;
       const lng = event.latlng.lng;
-      this.clicked_coord = [lat,lng]})
+      this.clickedCoord = { lat: lat, lng: lng };
+
+      this.updateForm(lat, lng);})
 
   }
+
+  initForm(): void {
+    this.mapForm = this.formBuilder.group({
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
+      name: ['', [Validators.required]]
+    });
+  }
+
+  onSubmit(){
+    if (this.mapForm.valid) {
+      const id = this.locationConfigSerivce.generateNewId();
+      const latitude = this.mapForm.get('latitude').value;
+      const longitude = this.mapForm.get('longitude').value;
+      const name = this.mapForm.get('name').value;
+      const location: Location = {id, name, latitude, longitude}
+      this.locationConfigSerivce.push_locations(location)
+      this.mapForm.reset()
+
+  }}
 }

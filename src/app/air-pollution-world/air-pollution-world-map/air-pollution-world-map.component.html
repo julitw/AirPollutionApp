@@ -1,5 +1,20 @@
 
-<div id="map" style="height: 400px;"></div>
 
-<p>Chosen place: {{clicked_place}}</p>
-<p>Chosen cooridnates: {{clicked_coord}}</p>
+
+<form [formGroup]="mapForm" (ngSubmit)="onSubmit()">
+    <label>
+      Latitude:
+      <input type="number" formControlName="latitude">
+    </label>
+    <label>
+      Longitude:
+      <input type="number" formControlName="longitude">
+    </label>
+    <label>
+      Name:
+      <input type="text" formControlName="name">
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="map" style="height: 400px;"></div>

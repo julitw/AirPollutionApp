@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let data of locationsAirQuality">
-                    <td><input type="checkbox" (change)="toggleSelection(data)"></td>
+                    <td><input type="checkbox" [checked]="isSelected(data)" (change)="toggleSelection(data)"></td>
                     <td>{{ data.id }}</td>
                     <td>{{ data.name}}</td>
                     <td>{{ data.airQuality[0].main.aqi }}</td>
@@ -39,10 +39,10 @@
         
         </div>
     
-        <button (click) = "show_graphs()">Show graphs</button>
+        <!-- <button (click) = "show_graphs()">Show graphs</button> -->
     </div>
     <!-- <div  class="info-container">
         <router-outlet></router-outlet>
     </div> -->
-    
+    <app-air-pollution-world-figures></app-air-pollution-world-figures>
 </div>
