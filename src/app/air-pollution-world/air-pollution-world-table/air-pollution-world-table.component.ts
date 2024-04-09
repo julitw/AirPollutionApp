@@ -20,8 +20,10 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
   selectedLocationsSubscription: Subscription;
   selectedLocationsMap: Location[] = [];
 
-  private selectedLocationsMapSubscription: Subscription;
+  hiddenRowsSubscrption: Subscription;
+  hiddenRows: number[] = []
 
+  private selectedLocationsMapSubscription: Subscription;
 
 
   constructor(private airPollutionWorldService: AirPollutionWorldService) {}
@@ -39,6 +41,18 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
         }
       );
 
+      this.hiddenRowsSubscrption = this.airPollutionWorldService.filteresLocations$
+      .subscribe(
+        (hiddenLocations: number[]) => {
+          this.hiddenRows= hiddenLocations;
+          console.log('hiddenlocations:', this.hiddenRows);
+        },
+        error => {
+          console.error('Error subscribing to filtered rows:', error);
+        }
+      );
+
+      
       this.selectedLocationsSubscription = this.airPollutionWorldService.selectedLocations$
       .subscribe(
         (selectedLocations: LocationAirQuality[]) => {

@@ -34,26 +34,6 @@ export class AirPollutionWorldComponent implements OnInit {
       });
   }
 
-  // onSubmit(): void {
-  //     this.airPollutionWorldService.getData(this.latitude, this.longitude);
-  //     this.latitude = null;
-  //     this.longitude = null;
-
-  // }
-
-  // addLocalization(){
-  //   const id = this.locationConfigService.generateNewId();
-  //   const name = this.nameLocation
-  //   const latitude = this.latitudeLocation
-  //   const longitude =this.longitudeLocation
-  //   const location: Location = {id, name, latitude, longitude}
-  //   this.locationConfigService.push_locations(location)
-  //   this.nameLocation = '';
-  //   this.latitudeLocation = null;
-  //   this.longitudeLocation = null;
-    
-  // }
-
   ngOnDestroy(): void {
     if (this.airQualityDataSubscription) {
       this.airQualityDataSubscription.unsubscribe();

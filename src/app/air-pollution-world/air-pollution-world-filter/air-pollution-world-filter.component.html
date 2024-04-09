@@ -1,0 +1,114 @@
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="tip-modal">
+      <div class="row mt3">
+        <div class="mt3 mx-auto">
+          <div class="tip-amount text-center">
+
+
+            <div class="filter_co">
+              <p>co</p>
+              <div class="min">
+                <input type="number" formControlName="co_min" (input)="changeInputTip($event.target.value)" />
+                <input type="range" min="0" max="2000" step="1" id="slider_co_min" class="slider" formControlName="slider_co_min" #slider_co_min />
+              </div>
+              <div class="min">
+                <input type="range" min="0" max="2000" step="0.1" id="slider_co_max" class="slider" formControlName="slider_co_max" #slider_co_max />
+                <input type="number" formControlName="co_max" (input)="changeInputTip2($event.target.value)" />
+              </div>
+            </div>
+
+
+            <div class="filter_no">
+              <p>no</p>
+              <div class="min">
+                <input type="number" formControlName="no_min" (input)="changeInputNo($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_no_min" class="slider" formControlName="slider_no_min" #slider_no_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_no_max" class="slider" formControlName="slider_no_max" #slider_no_max />
+                <input type="number" formControlName="no_max" (input)="changeInputNoMax($event.target.value)" />
+              </div>
+            </div>
+
+            <div class="filter_no2">
+              <p>no2</p>
+              <div class="min">
+                <input type="number" formControlName="no2_min" (input)="changeInputNo2($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_no2_min" class="slider" formControlName="slider_no2_min" #slider_no2_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_no2_max" class="slider" formControlName="slider_no2_max" #slider_no2_max />
+                <input type="number" formControlName="no2_max" (input)="changeInputNo2Max($event.target.value)" />
+              </div>
+            </div>
+
+            <div class="filter_o3">
+              <p>o3</p>
+              <div class="min">
+                <input type="number" formControlName="o3_min" (input)="changeInputo3($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_o3_min" class="slider" formControlName="slider_o3_min" #slider_o3_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_o3_max" class="slider" formControlName="slider_o3_max" #slider_o3_max />
+                <input type="number" formControlName="o3_max" (input)="changeInputo3Max($event.target.value)" />
+              </div>
+            </div>
+
+            <div class="filter_so2">
+              <p>so2</p>
+              <div class="min">
+                <input type="number" formControlName="so2_min" (input)="changeInputso2($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_so2_min" class="slider" formControlName="slider_so2_min" #slider_so2_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_so2_max" class="slider" formControlName="slider_so2_max" #slider_so2_max />
+                <input type="number" formControlName="so2_max" (input)="changeInputso2Max($event.target.value)" />
+              </div>
+            </div>
+
+            <div class="filter_pm2_5">
+              <p>pm2_5</p>
+              <div class="min">
+                <input type="number" formControlName="pm2_5_min" (input)="changeInputpm2_5($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_pm2_5_min" class="slider" formControlName="slider_pm2_5_min" #slider_pm2_5_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_pm2_5_max" class="slider" formControlName="slider_pm2_5_max" #slider_pm2_5_max />
+                <input type="number" formControlName="pm2_5_max" (input)="changeInputpm2_5Max($event.target.value)" />
+              </div>
+            </div>
+
+            <div class="filter_pm10">
+              <p>pm_10</p>
+              <div class="min">
+                <input type="number" formControlName="pm10_min" (input)="changeInputpm10($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_pm10_min" class="slider" formControlName="slider_pm10_min" #slider_pm10_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_pm10_max" class="slider" formControlName="slider_pm10_max" #slider_pm10_max />
+                <input type="number" formControlName="pm10_max" (input)="changeInputpm10Max($event.target.value)" />
+              </div>
+            </div>
+
+            <div class="filter_nh3">
+              <p>mh3</p>
+              <div class="min">
+                <input type="number" formControlName="nh3_min" (input)="changeInputnh3($event.target.value)" />
+                <input type="range" min="0" max="1000" step="0.1" id="slider_nh3_min" class="slider" formControlName="slider_nh3_min" #slider_nh3_min />
+              </div>
+              <div class="max">
+                <input type="range" min="0" max="1000" step="0.1" id="slider_nh3_max" class="slider" formControlName="slider_nh3_max" #slider_nh3_max />
+                <input type="number" formControlName="nh3_max" (input)="changeInputnh3Max($event.target.value)" />
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="submit-button">Filter</button>
+    </div>
+  </form>
+  <button (click)="resetFilters()" >Reset filters</button>
+</div>

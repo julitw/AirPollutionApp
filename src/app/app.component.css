@@ -1,0 +1,21 @@
+.nav-tabs {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .nav-tabs li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .nav-tabs a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .nav-tabs a:hover {
+    color: #f36621;
+  }

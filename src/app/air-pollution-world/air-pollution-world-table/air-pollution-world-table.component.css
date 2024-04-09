@@ -6,3 +6,7 @@ tr:hover {
     cursor: pointer;
     background-color: rgb(196, 246, 248)
 }
+
+.thead{
+    width: 100%;
+}

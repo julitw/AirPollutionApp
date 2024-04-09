@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
+
 import { AppComponent } from './app.component';
 import { AirPollutionWorldComponent } from './air-pollution-world/air-pollution-world.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AirPollutionWorldMapComponent } from './air-pollution-world/air-pollution-world-map/air-pollution-world-map.component';
 import { AirPollutionWorldTable } from './air-pollution-world/air-pollution-world-table/air-pollution-world-table.component';
 import { AirPollutionWorldFigures } from './air-pollution-world/air-pollution-world-figures/air-pollution-world-figures.component';
+import { AirPollutionWorldFilterComponent } from './air-pollution-world/air-pollution-world-filter/air-pollution-world-filter.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,14 @@ import { AirPollutionWorldFigures } from './air-pollution-world/air-pollution-wo
     AirPollutionWorldMapComponent,
     AirPollutionWorldTable,
     AirPollutionWorldFigures,
+    AirPollutionWorldFilterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   providers: [],

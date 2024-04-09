@@ -21,6 +21,9 @@ export class AirPollutionWorldService {
   private selectedLocationsSubject = new BehaviorSubject<LocationAirQuality[]>([]);
     selectedLocations$ = this.selectedLocationsSubject.asObservable();
 
+  private filteredRowSubject = new BehaviorSubject<number[]>([]);
+  filteresLocations$ = this.filteredRowSubject.asObservable(); 
+
   selectedLocationsMap: LocationAirQuality[] = []
 
   private locations: Location[] = [];
@@ -157,6 +160,55 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
   
     this.locationsAirQualitySubject.next(currentArray);
   }
+
+  filterTable(fieldsObject: any):number[] {
+    const hiddenRows: number[] = [];
+    console.log('SERVICE', fieldsObject);
+
+    const currentArray = this.locationsAirQualitySubject.getValue();
+    const filteredLocations: LocationAirQuality[] = [];
+
+    currentArray.forEach((location: LocationAirQuality, index: number) => {
+      let meetsCriteria = true;
+  
+      for (const key of Object.keys(fieldsObject)) {
+        const fieldValue = fieldsObject[key];
+  
+        if (fieldValue !== false) {
+          const fieldName = key.replace('_min', '').replace('_max', '');
+  
+          if (fieldName in location.airQuality[0].components) {
+            const componentValue = location.airQuality[0].components[fieldName];
+  
+            if (key.endsWith('_min') && componentValue < fieldValue) {
+              meetsCriteria = false;
+              break;
+            }
+  
+            if (key.endsWith('_max') && componentValue > fieldValue) {
+              meetsCriteria = false;
+              break;
+            }
+          }
+        }
+      }
+  
+      if (!meetsCriteria) {
+        const x = location.id
+        hiddenRows.push(index); 
+      }
+    });
+  
+    console.log("HIDD", hiddenRows)
+    this.filteredRowSubject.next(hiddenRows)
+    return hiddenRows;
+  }
+
+  resetFilters(){
+    this.filteredRowSubject.next([])
+  }
+
+
 
   updateSelectedLocations(locations: LocationAirQuality[]): void {
             this.selectedLocationsSubject.next(locations);

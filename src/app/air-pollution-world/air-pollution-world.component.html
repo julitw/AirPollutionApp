@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="form-container">
-    <!-- <h2>Enter Coordinates:</h2>
+
+  <!-- <div class="form-container">
+     <h2>Enter Coordinates:</h2>
     <form (ngSubmit)="onSubmit()" class="pollution-form">
       <div class="form-group">
         <label for="latitude">Latitude:</label>
@@ -25,8 +25,8 @@
           </li>
         </ul>
       </div>
-    </form> -->
-  </div>
+    </form> 
+  </div> -->
 
   <!-- <form (ngSubmit)="addLocalization()" class="pollution-form">
     <div class="form-group">
@@ -49,9 +49,19 @@
   </form> -->
   
 
-
+<div class="container">
   <div class="map-container">
     <app-air-pollution-world-map></app-air-pollution-world-map>
-    <app-air-pollution-world-table></app-air-pollution-world-table>
+    <div class="table-fiter-container">
+      <div class="table-container">
+          <app-air-pollution-world-table></app-air-pollution-world-table>
+      </div>
+      <div class="filter-container">
+          <app-air-pollution-world-filter></app-air-pollution-world-filter>
+      </div>
+  </div>
+  <app-air-pollution-world-figures></app-air-pollution-world-figures>
   </div>
 </div>
+
+ 
