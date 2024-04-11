@@ -5,11 +5,11 @@
     "node": ">=18 <19"
   },
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "ng": "npm run ng",
+    "start": "npm run serve",
+    "build": "npm run build",
+    "watch": "npm run build --watch --configuration development",
+    "test": "npm run test"
   },
   "private": true,
   "dependencies": {
