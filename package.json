@@ -7,7 +7,6 @@
   "scripts": {
     "ng": "npm run ng",
     "start": "npm run serve",
-    "build": "webpack --mode production",
     "watch": "npm run build --watch --configuration development",
     "test": "npm run test"
   },
