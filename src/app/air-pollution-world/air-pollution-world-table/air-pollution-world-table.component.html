@@ -10,12 +10,13 @@
                     <th (click)="sortTable('aqi')">AQI</th>
                     <th (click)="sortTable('co')">CO</th>
                     <th (click)="sortTable('no')">NO</th>
-                    <th (click)="sortTable('no2')">NO2</th>
-                    <th (click)="sortTable('o3')">O3</th>
-                    <th (click)="sortTable('so2')">SO2</th>
-                    <th (click)="sortTable('pm2_5')">PM2.5</th>
-                    <th (click)="sortTable('pm10')">pm10</th>
-                    <th (click)="sortTable('nh3')">nh3</th>
+                    <th (click)="sortTable('no2')">N<sub>2</sub></th>
+                    <th (click)="sortTable('o3')">O<sub>3</sub></th>
+                    <th (click)="sortTable('so2')">SO<sub>2</sub></th>
+                    <th (click)="sortTable('pm2_5')">PM2<sub>5</sub></th>
+                    <th (click)="sortTable('pm10')">pm<sub>10</sub></th>
+                    <th (click)="sortTable('nh3')">nh<sub>3</sub></th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                           <td>{{ data.airQuality[0].components.pm2_5 }}</td>
                           <td>{{ data.airQuality[0].components.pm10 }}</td>
                           <td>{{ data.airQuality[0].components.nh3 }}</td>
+                          <td><button class="btn btn-outline-danger" (click)="deleteItem(data.id)">delete</button></td>
                         </tr>
                       </ng-container>
                 </tbody>

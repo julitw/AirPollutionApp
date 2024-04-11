@@ -47,6 +47,7 @@ export class AirPollutionWorldService {
     this.locationsSubscription = this.locationsService.locations$.subscribe(
       (locations: Location[]) => {
         console.log('Locations updated:', locations);
+        this.checkSelectedValue()
 
         this.loadLocationsAirQuality().subscribe(
           (locationAirQualityArray: LocationAirQuality[]) => {
@@ -113,6 +114,16 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
         this.selectedLocationsSubject.next(currentSelectedLocations)
     }
         
+  }
+
+  checkSelectedValue(){
+    const currentLocations = this.locationsService.get_locations();
+    let selectedLocations = this.selectedLocationsSubject.getValue();
+    selectedLocations = selectedLocations.filter(selectedLocation =>
+      currentLocations.some(currentLocation => currentLocation.id === selectedLocation.id)
+    );
+    console.log('USUWANIE', selectedLocations)
+    this.selectedLocationsSubject.next(selectedLocations);
   }
   
   getData(latitude: number, longitude: number): void {

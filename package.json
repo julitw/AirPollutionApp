@@ -28,6 +28,7 @@
     "angular-plotly.js": "^5.2.2",
     "assert": "^2.1.0",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.2",
     "leaflet": "^1.9.4",
     "ng2-charts": "^5.0.3",

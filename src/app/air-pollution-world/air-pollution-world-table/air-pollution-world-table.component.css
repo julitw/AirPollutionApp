@@ -1,3 +1,7 @@
+table{
+    width: 100%;
+}
+
 th:hover {
     cursor: pointer;
     background-color: lightblue
@@ -7,6 +11,24 @@ tr:hover {
     background-color: rgb(196, 246, 248)
 }
 
+
 .thead{
     width: 100%;
 }
+
+
+@media (max-width: 768px) {
+    table {
+      font-size: 12px; 
+    }
+  
+    th,
+    td {
+      padding: 8px; 
+    }
+  
+    .thead {
+      overflow-x: auto; 
+    }
+  }
+  

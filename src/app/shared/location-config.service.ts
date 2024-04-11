@@ -31,7 +31,11 @@ export class LocationConfigService {
   get_locations(){
     return this.locations
   }
-  gen
+  
+  removeLocation(id: number){
+    this.locations = this.locations.filter(location => location.id !== id);
+    this.locationsSubject.next(this.locations);
+  }
 
   push_locations(location: Location){
 

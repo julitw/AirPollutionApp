@@ -3,6 +3,7 @@ import { AirPollutionWorldService } from '../air-pollution-world.service';
 import { LocationAirQuality } from 'src/app/shared/location-air-pollution.model';
 import { Subscription } from 'rxjs';
 import { Location } from 'src/app/shared/location.model';
+import { LocationConfigService } from 'src/app/shared/location-config.service';
 
 declare let L: any;
 
@@ -26,7 +27,7 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
   private selectedLocationsMapSubscription: Subscription;
 
 
-  constructor(private airPollutionWorldService: AirPollutionWorldService) {}
+  constructor(private airPollutionWorldService: AirPollutionWorldService,private locationsService: LocationConfigService) {}
 
   ngOnInit(): void {
     this.airQualityDataLocation = this.airPollutionWorldService.locationsAirQuality$
@@ -91,6 +92,10 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
 
   show_graphs(){
     console.log(this.selectedLocations)
+  }
+
+  deleteItem(id:number){
+    this.locationsService.removeLocation(id)
   }
 
 }

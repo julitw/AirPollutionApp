@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-around;
 }
+.graph-container{
+  width: 100%;
+}
 
 
 

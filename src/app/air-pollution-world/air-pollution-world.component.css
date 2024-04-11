@@ -12,7 +12,7 @@
   
   .container {
     max-width: 1200px;
-    margin: 50px auto;
+    /* margin: 50px auto; */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -25,6 +25,7 @@
   }
   
 .table_container{
+  width: 100% ;
     display: flex;
     flex-direction: row;
   }
@@ -32,12 +33,6 @@
 .table-fiter-container {
     display: flex;  
     justify-content: space-around;
+    flex-direction: column;
 }
 
-.table-container{
-    width:75%;
-}
-
-.filter-container {
-  width:25%;
-}

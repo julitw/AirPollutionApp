@@ -1,63 +1,12 @@
-
-  <!-- <div class="form-container">
-     <h2>Enter Coordinates:</h2>
-    <form (ngSubmit)="onSubmit()" class="pollution-form">
-      <div class="form-group">
-        <label for="latitude">Latitude:</label>
-        <input type="number" id="latitude" name="latitude" [(ngModel)]="latitude" required>
-      </div>
-
-      <div class="form-group">
-        <label for="longitude">Longitude:</label>
-        <input type="number" id="longitude" name="longitude" [(ngModel)]="longitude" required>
-      </div>
-
-      <button type="submit" class="submit-btn">Get Pollution Data</button>
-
-      <div *ngIf="airQualityData.length > 0" class="air-quality">
-        <h3>Air Quality Data:</h3>
-        <ul>
-          <li *ngFor="let data of airQualityData" class="data-item">
-            <p><strong>Date:</strong> {{ data.dt | date }}</p>
-            <p><strong>Air Quality Index (AQI):</strong> {{ data.main.aqi }}</p>
-            <p><strong>CO:</strong> {{ data.components.co }} µg/m³</p>
-            <p><strong>NO:</strong> {{ data.components.no }} µg/m³</p>
-          </li>
-        </ul>
-      </div>
-    </form> 
-  </div> -->
-
-  <!-- <form (ngSubmit)="addLocalization()" class="pollution-form">
-    <div class="form-group">
-      <label for="nameLocation">name:</label>
-      <input type="text" id="nameLocation" name="nameLocation" [(ngModel)]="nameLocation" required>
-    </div>
-
-    <div class="form-group">
-      <label for="latitudeLocation">Latitude:</label>
-      <input type="number" id="latitudeLocation" name="latitudeLocation" [(ngModel)]="latitudeLocation" required>
-    </div>
-
-    <div class="form-group">
-      <label for="longitudeLocation">Longitude:</label>
-      <input type="number" id="longitudeLocation" name="longitudeLocation" [(ngModel)]="longitudeLocation" required>
-    </div>
-
-    <button type="submit" class="submit-btn">Add Localization</button>
-
-  </form> -->
-  
-
 <div class="container">
   <div class="map-container">
     <app-air-pollution-world-map></app-air-pollution-world-map>
+    <div class="filter-container">
+      <app-air-pollution-world-filter></app-air-pollution-world-filter>
+  </div>
     <div class="table-fiter-container">
       <div class="table-container">
           <app-air-pollution-world-table></app-air-pollution-world-table>
-      </div>
-      <div class="filter-container">
-          <app-air-pollution-world-filter></app-air-pollution-world-filter>
       </div>
   </div>
   <app-air-pollution-world-figures></app-air-pollution-world-figures>
