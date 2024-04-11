@@ -12,6 +12,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+
+### Notice 
+In the project, there is no environment.ts file with api key
+
 <img width="899" alt="home" src="https://github.com/julitw/AirPollutionApp/assets/123335248/51deb9e0-37e3-4f64-a1b0-9b096ca4a522">
 <img width="671" alt="app6" src="https://github.com/julitw/AirPollutionApp/assets/123335248/ae2b1ac9-bad8-4fb9-9490-cefb9591c605">
 <img width="643" alt="app5" src="https://github.com/julitw/AirPollutionApp/assets/123335248/8387cc2d-af0d-4697-a93f-608e95bd9de4">
