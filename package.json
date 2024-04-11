@@ -2,7 +2,7 @@
   "name": "air-pollution-app",
   "version": "0.0.0",
   "engines": {
-    "node": ">=19 <20"
+    "node": ">=20.12.21"
   },
   "scripts": {
     "ng": "ng",
