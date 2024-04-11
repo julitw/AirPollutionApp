@@ -41,7 +41,7 @@ export class LocationConfigService {
 
     this.locations.push(location);
     this.locationsSubject.next(this.locations)
-    console.log(this.locations)
+
   }
 
   generateNewId(): number {

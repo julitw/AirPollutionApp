@@ -50,7 +50,6 @@ export class AirPollutionWorldFigures implements OnInit {
           this.selectedLocations = selectedLocations;
             if (this.selectedLocations.length >= 0){
                 this.createChart()
-                console.log('USUWAAA', this.selectedLocations)
             }
         },
         error => {

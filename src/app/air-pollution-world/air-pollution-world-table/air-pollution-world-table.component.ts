@@ -34,8 +34,7 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
       .subscribe(
         (data: LocationAirQuality[]) => {
           this.locationsAirQuality = data;
-          console.log('TABLE data:', this.locationsAirQuality);
-          
+    
         },
         error => {
           console.error('Error loading location air quality data:', error);
@@ -46,7 +45,6 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
       .subscribe(
         (hiddenLocations: number[]) => {
           this.hiddenRows= hiddenLocations;
-          console.log('hiddenlocations:', this.hiddenRows);
         },
         error => {
           console.error('Error subscribing to filtered rows:', error);
@@ -58,7 +56,6 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
       .subscribe(
         (selectedLocations: LocationAirQuality[]) => {
           this.selectedLocations = selectedLocations;
-          console.log('Selected locations:', this.selectedLocations);
         },
         error => {
           console.error('Error subscribing to selected locations:', error);
@@ -78,7 +75,6 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
 
   toggleSelection(location: LocationAirQuality): void {
     if (this.isSelected(location)) {
-      console.log('OKK')
       this.airPollutionWorldService.updateSelectedLocations(this.selectedLocations.filter(item => item.id !== location.id));
     } else {
       const updatedSelectedLocations = [...this.selectedLocations, location];
@@ -88,10 +84,6 @@ export class AirPollutionWorldTable implements OnInit, OnDestroy {
 
   isSelected(location: LocationAirQuality): boolean {
     return this.selectedLocations.some(item => item.id === location.id);
-  }
-
-  show_graphs(){
-    console.log(this.selectedLocations)
   }
 
   deleteItem(id:number){

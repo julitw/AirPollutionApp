@@ -12,7 +12,7 @@ export class HomeComponent {
     constructor() { }
 
     ngOnInit(): void {
-        const text = 'Check the air condition around the world';
+        const text = 'Check the air condition around the world!';
         this.animateWords(text);
     }
 
@@ -26,6 +26,6 @@ export class HomeComponent {
             } else {
                 clearInterval(interval);
             }
-        }, 150);
+        }, 200);
     }
 }

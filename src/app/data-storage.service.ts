@@ -5,14 +5,11 @@ import { AirPollutionResponse } from './shared/air-pollution-response.model';
 import { environment } from 'src/environments';
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class PollutionDataService {
   private apiKey = environment.apiKey;
-
 
   constructor(private http: HttpClient) {}
 

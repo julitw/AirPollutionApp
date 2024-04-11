@@ -255,7 +255,6 @@ export class AirPollutionWorldFilterComponent implements AfterViewInit {
           }
       }
 
-      console.log("Changed fields:", changedFields);
 
       const formKeys = Object.keys(changedFields);
       const filteredFormValues: any = {};
@@ -265,8 +264,6 @@ export class AirPollutionWorldFilterComponent implements AfterViewInit {
                   filteredFormValues[key] = changedFields[key];
               }
       }
-
-      console.log("Filtered and marked changes:", filteredFormValues);
 
       const fieldsObject: any = {
         co_min: filteredFormValues.co_min,

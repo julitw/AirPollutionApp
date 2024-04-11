@@ -38,7 +38,6 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
       .subscribe(
         (data: LocationAirQuality[]) => {
           this.locationsAirQuality = data;
-          console.log('Received location air quality data:', this.locationsAirQuality);
           this.updateMap(); 
         },
         error => {

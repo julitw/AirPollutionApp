@@ -46,12 +46,10 @@ export class AirPollutionWorldService {
   constructor(private pollutionDataService: PollutionDataService, private locationsService: LocationConfigService) {
     this.locationsSubscription = this.locationsService.locations$.subscribe(
       (locations: Location[]) => {
-        console.log('Locations updated:', locations);
         this.checkSelectedValue()
 
         this.loadLocationsAirQuality().subscribe(
           (locationAirQualityArray: LocationAirQuality[]) => {
-            console.log("x", locationAirQualityArray)
           },
           (error) => {
             console.error('Error loading location air quality data:', error);
@@ -63,8 +61,6 @@ export class AirPollutionWorldService {
 
 loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
     this.locations = this.locationsService.get_locations();
-    console.log('locationnnn', this.locations);
-
     const requests: Observable<LocationAirQuality>[] = [];
 
     this.locations.forEach(location => {
@@ -86,7 +82,6 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
       forkJoin(requests).subscribe(
         (locationAirQualityArray: LocationAirQuality[]) => {
           this.locationsAirQualitySubject.next(locationAirQualityArray);
-          console.log('Received location air quality data:', locationAirQualityArray);
           observer.next(locationAirQualityArray); 
           observer.complete();
         },
@@ -101,13 +96,11 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
   addLocationClickedMap(location: Location): void {
     const currentLocations = this.locationsAirQualitySubject.getValue()
     var  currentSelectedLocations = this.selectedLocationsSubject.getValue();
-    console.log('MAPA', currentSelectedLocations)
     const existingSelectedLocation = currentSelectedLocations.find(loc => loc.id === location.id);
     if (!existingSelectedLocation){
         const newSelectedLocation = currentLocations.find((loc)=> loc.id === location.id)
         currentSelectedLocations.push(newSelectedLocation)
         this.selectedLocationsSubject.next(currentSelectedLocations)
-        console.log("NIE ISTNIEJE", newSelectedLocation)
     }
       else{
         currentSelectedLocations = currentSelectedLocations.filter((loc) => loc.id !== location.id)
@@ -122,7 +115,6 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
     selectedLocations = selectedLocations.filter(selectedLocation =>
       currentLocations.some(currentLocation => currentLocation.id === selectedLocation.id)
     );
-    console.log('USUWANIE', selectedLocations)
     this.selectedLocationsSubject.next(selectedLocations);
   }
   
@@ -174,7 +166,6 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
 
   filterTable(fieldsObject: any):number[] {
     const hiddenRows: number[] = [];
-    console.log('SERVICE', fieldsObject);
 
     const currentArray = this.locationsAirQualitySubject.getValue();
     const filteredLocations: LocationAirQuality[] = [];
@@ -210,7 +201,6 @@ loadLocationsAirQuality(): Observable<LocationAirQuality[]> {
       }
     });
   
-    console.log("HIDD", hiddenRows)
     this.filteredRowSubject.next(hiddenRows)
     return hiddenRows;
   }
