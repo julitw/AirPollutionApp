@@ -26,6 +26,6 @@ export class HomeComponent {
             } else {
                 clearInterval(interval);
             }
-        }, 200);
+        }, 150);
     }
 }

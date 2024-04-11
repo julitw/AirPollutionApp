@@ -1,20 +1,30 @@
 
 
 
-<form [formGroup]="mapForm" (ngSubmit)="onSubmit()">
-    <label>
-      Latitude:
-      <input type="number" formControlName="latitude">
-    </label>
-    <label>
-      Longitude:
-      <input type="number" formControlName="longitude">
-    </label>
-    <label>
-      Name:
-      <input type="text" formControlName="name">
-    </label>
-    <button type="submit">Submit</button>
-  </form>
+<form [formGroup]="mapForm" (ngSubmit)="onSubmit()" novalidate>
+  <label>
+    Latitude:
+    <input type="number" formControlName="latitude" [class.is-invalid]="mapForm.get('latitude').invalid && (mapForm.get('latitude').dirty || formSubmitted)">
+    <div *ngIf="mapForm.get('latitude').invalid && (mapForm.get('latitude').dirty || formSubmitted)" class="invalid-feedback">
+      Latitude is required and must be between -90 and 90.
+    </div>
+  </label>
+  <label>
+    Longitude:
+    <input type="number" formControlName="longitude" [class.is-invalid]="mapForm.get('longitude').invalid && (mapForm.get('longitude').dirty || formSubmitted)">
+    <div *ngIf="mapForm.get('longitude').invalid && (mapForm.get('longitude').dirty || formSubmitted)" class="invalid-feedback">
+      Longitude is required and must be between -180 and 180.
+    </div>
+  </label>
+  <label>
+    Name:
+    <input type="text" formControlName="name" [class.is-invalid]="mapForm.get('name').invalid && (mapForm.get('name').dirty || formSubmitted)">
+    <div *ngIf="mapForm.get('name').invalid && (mapForm.get('name').dirty || formSubmitted)" class="invalid-feedback">
+      Name is required.
+    </div>
+  </label>
+  <button type="submit" [disabled]="mapForm.invalid">Submit</button>
+</form>
+
 
   <div id="map" style="height: 400px;"></div>

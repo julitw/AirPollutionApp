@@ -27,6 +27,7 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
   map: any; 
 
   mapForm: FormGroup;
+  formSubmitted: boolean = false;
   
   clickedCoord: { lat: number, lng: number };
 
@@ -46,8 +47,9 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
 
       );
       this.mapForm = this.formBuilder.group({
-        latitude: [''],
-        longitude: ['']
+        latitude: ['', [Validators.required, Validators.min(-90), Validators.max(90)]],
+        longitude: ['', [Validators.required, Validators.min(-180), Validators.max(180)]],
+        name: ['', [Validators.required]]
       });
       this.initForm();
     this.initMap();
@@ -139,9 +141,9 @@ export class AirPollutionWorldMapComponent implements OnInit, OnDestroy {
   }
 
   initForm(): void {
-    this.mapForm = this.formBuilder.group({
-      latitude: ['', [Validators.required]],
-      longitude: ['', [Validators.required]],
+    this.mapForm == this.formBuilder.group({
+      latitude: ['', [Validators.required, Validators.min(-90), Validators.max(90)]],
+      longitude: ['', [Validators.required, Validators.min(-180), Validators.max(180)]],
       name: ['', [Validators.required]]
     });
   }
